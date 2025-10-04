@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container pad-y">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+    <h1>Quem Somos — Blocos</h1>
+    <div style="display:flex;gap:8px">
+      <a class="btn" href="{{ url_for('main.about_new') }}">+ Novo bloco</a>
+      <a class="btn btn--ghost" href="{{ url_for('main.admin_dashboard') }}">Voltar ao painel</a>
+    </div>
+  </div>
+
+  {% set section_labels = {'story':'História','mission':'Missão','vision':'Visão','values':'Valores'} %}
+
+  <table class="table" style="margin-top:12px">
+    <thead>
+      <tr><th>#</th><th>Título</th><th>Seção</th><th>Ordem</th><th style="width:220px">Ações</th></tr>
+    </thead>
+    <tbody>
+      {% for b in blocks|sort(attribute='display_order') %}
+      <tr>
+        <td>{{ b.id }}</td>
+        <td>{{ b.title }}</td>
+        <td>{{ section_labels.get(b.section, b.section) }}</td>
+        <td>{{ b.display_order }}</td>
+        <td class="actions">
+          <a class="btn-sm" href="{{ url_for('main.about_edit', block_id=b.id) }}">Editar</a>
+          <form method="post" action="{{ url_for('main.about_delete', block_id=b.id) }}" style="display:inline" onsubmit="return confirm('Excluir este bloco?');">
+            <button class="btn-sm danger" type="submit">Excluir</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5">Nenhum bloco cadastrado.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

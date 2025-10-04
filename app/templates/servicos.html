@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Serviços</h1>
+    <p>Escolha um serviço para saber mais e encontrar profissionais.</p>
+  </div>
+</section>
+
+<main class="container pad-y">
+  <section class="services">
+<div class="services__cards">
+  {% for s in services %}
+    <button type="button"
+            class="service-card{% if loop.first %} is-active{% endif %}"
+            data-id="{{ s.id }}">
+      <div class="service-card__thumb">
+        <img src="{{ url_for('static', filename=s.icon or 'banho.png') }}" alt="{{ s.name }}">
+      </div>
+      <span class="service-card__name">{{ s.name }}</span>
+    </button>
+  {% endfor %}
+</div>
+
+<div class="services__detail" id="service-detail">
+  {% if services %}
+    {% set first = services[0] %}
+    <header class="services__header">
+      <img src="{{ url_for('static', filename=first.icon or 'banho.png') }}" alt="{{ first.name }}" width="32" height="32">
+      <h3>{{ first.name }}</h3>
+      <p class="muted">{{ first.description or 'Atendimento domiciliar e preventivo' }}</p>
+    </header>
+
+    <p class="services__price">Preço médio: <strong>R$ {{ '%.2f'|format(first.price) }}</strong></p>
+    <p class="services__info">Os preços podem variar conforme o profissional, localização e necessidades específicas do seu pet.</p>
+
+    <a class="btn" href="#">Encontrar profissionais</a>
+  {% else %}
+    <p>Nenhum serviço ativo no momento.</p>
+  {% endif %}
+</div>
+
+  </section>
+</main>
+
+{% endblock %}

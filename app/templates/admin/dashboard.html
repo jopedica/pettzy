@@ -1,0 +1,93 @@
+{% extends "admin/base_admin.html" %}
+{% import "macros/ui.html" as ui %}
+{% set page_title = "Admin" %}
+
+{% block admin_content %}
+
+<!-- ===== SERVIÇOS ===== -->
+<div class="card" style="margin-bottom:18px">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+    <h2 class="h3">Serviços <span class="muted">({{ services|length }})</span></h2>
+    <div style="display:flex;gap:8px">
+      <a class="btn" href="{{ url_for('main.services_new') }}">+ Novo serviço</a>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr><th>#</th><th>Nome</th><th>Preço</th><th>Status</th><th style="width:260px">Ações</th></tr>
+    </thead>
+    <tbody>
+      {% for s in services %}
+      <tr>
+        <td>{{ s.id }}</td>
+        <td>{{ s.name }}</td>
+        <td>R$ {{ '%.2f'|format(s.price) }}</td>
+        <td>{{ ui.badge_active(s.is_active) }}</td>
+        <td class="actions">
+  <!-- Editar (GET) -->
+  <a class="btn-sm" href="{{ url_for('main.services_edit', service_id=s.id) }}">Editar</a>
+
+  <!-- Ativar/Inativar (POST) -->
+  <form method="post"
+        action="{{ url_for('main.services_toggle', service_id=s.id) }}"
+        class="inline">
+    <button type="submit" class="btn-sm">
+      {{ 'Inativar' if s.is_active else 'Ativar' }}
+    </button>
+  </form>
+
+  <!-- Excluir (POST) -->
+  <form method="post"
+        action="{{ url_for('main.services_delete', service_id=s.id) }}"
+        class="inline"
+        onsubmit="return confirm('Excluir este serviço?');">
+    <button type="submit" class="btn-sm danger">Excluir</button>
+  </form>
+</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5">Nenhum serviço cadastrado.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+<!-- ===== QUEM SOMOS ===== -->
+<div class="card">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+    <h2 class="h3">Quem Somos <span class="muted">({{ blocks|length }})</span></h2>
+    <div style="display:flex;gap:8px">
+      <!-- botão no cabeçalho -->
+<a class="btn" href="{{ url_for('main.about_new') }}">+ Novo bloco</a>
+
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr><th>#</th><th>Título</th><th>Seção</th><th>Ordem</th><th style="width:220px">Ações</th></tr>
+    </thead>
+    <tbody>
+      {% set labels = {'story':'História','mission':'Missão','vision':'Visão','values':'Valores'} %}
+      {% for b in blocks|sort(attribute='display_order') %}
+      <tr>
+        <td>{{ b.id }}</td>
+        <td>{{ b.title }}</td>
+        <td>{{ labels.get(b.section, b.section) }}</td>
+        <td>{{ b.display_order }}</td>
+        <td class="actions">
+<a class="btn-sm" href="{{ url_for('main.about_edit', block_id=b.id) }}">Editar</a>
+       <form method="post" action="{{ url_for('main.about_delete', block_id=b.id) }}"
+      class="inline" onsubmit="return confirm('Excluir este bloco?');">
+  <button class="btn-sm danger" type="submit">Excluir</button>
+</form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5">Nenhum bloco cadastrado.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

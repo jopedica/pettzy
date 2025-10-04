@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Petzzy — Meus agendamentos</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="index.html">Petzzy</a>
+    <nav class="nav" aria-label="Primária">
+      <a href="{{ url_for('main.index') }}">Início</a>
+      <a href="{{ url_for('main.servicos') }}">Serviços</a>
+      <a href="{{ url_for('main.agendamentos') }}">Meus agendamentos</a>
+      <a href="{{ url_for('main.quem_somos') }}">Quem somos</a>
+      <a class="btn" href="{{ url_for('main.login') }}">Entrar</a>
+    </nav>
+    </div>
+  </header>
+
+  <!-- HERO CURTO -->
+  <section class="hero hero--soft">
+    <div class="container hero__mini">
+      <h1>Meus Agendamentos</h1>
+      <p>Acompanhe seus serviços já marcados e agende novos.</p>
+    </div>
+  </section>
+
+  <main class="container pad-y">
+    <!-- Botão Novo Agendamento -->
+    <div class="cta">
+      <a href="servicos.html" class="btn">+ Novo agendamento</a>
+    </div>
+
+    <!-- Lista de Agendamentos -->
+    <section class="grid" role="list">
+      <!-- Agendamento 1 -->
+      <article class="card" role="listitem">
+        <div class="card__body">
+          <h3 class="card__title">Banho &amp; Tosa</h3>
+          <p><strong>Data:</strong> 05/09/2025 — 14:00</p>
+          <p><strong>Profissional:</strong> Petz Spa</p>
+          <p><strong>Status:</strong> ✅ Confirmado</p>
+        </div>
+      </article>
+
+      <!-- Agendamento 2 -->
+      <article class="card" role="listitem">
+        <div class="card__body">
+          <h3 class="card__title">Consulta Veterinária</h3>
+          <p><strong>Data:</strong> 07/09/2025 — 10:30</p>
+          <p><strong>Profissional:</strong> Dr. João Silva</p>
+          <p><strong>Status:</strong> ⏳ Pendente</p>
+        </div>
+      </article>
+
+      <!-- Agendamento 3 -->
+      <article class="card" role="listitem">
+        <div class="card__body">
+          <h3 class="card__title">Dog Walk</h3>
+          <p><strong>Data:</strong> 09/09/2025 — 08:00</p>
+          <p><strong>Profissional:</strong> Maria Andrade</p>
+          <p><strong>Status:</strong> ❌ Cancelado</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer class="footer">
+    © <span id="year"></span> Petzzy • Todos os direitos reservados
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

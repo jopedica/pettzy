@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div>
+      <h1>O cuidado que seu pet merece, <strong>onde você estiver.</strong></h1>
+      <p>Agende banho & tosa, consulta veterinária, passeio e adestramento com profissionais próximos.</p>
+    </div>
+
+    <div class="hero__art" role="img" aria-label="Família de pets">
+      <img src="{{ url_for('static', filename='pets.png') }}" alt="Ilustração de cachorro, gato, coelho e outro cão juntos">
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS POPULARES -->
+<section id="servicos" class="container panel" aria-labelledby="tit-servicos">
+  <div class="panel__inner">
+    <h2 id="tit-servicos">Serviços Populares</h2>
+
+    <div class="grid" role="list">
+      {% for s in services %}
+        <article class="card" role="listitem">
+          <div class="card__thumb">
+            <img src="{{ url_for('static', filename=s.icon or 'banho.png') }}" alt="{{ s.name }}">
+          </div>
+          <div class="card__body">
+            <span class="pill">{{ s.name }}</span>
+            <p>{{ s.description }}</p>
+            <p><strong>R$ {{ '%.2f'|format(s.price) }}</strong></p>
+          </div>
+        </article>
+      {% else %}
+        <p>Nenhum serviço ativo ainda.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ======= NOVOS BLOCOS ======= -->
+
+<!-- VETERINÁRIO -->
+<section class="container panel panel--spaced" aria-labelledby="tit-vet">
+  <div class="panel__inner grid-2">
+    <div>
+      <h2 id="tit-vet">Quando levar o pet ao veterinário?</h2>
+      <p>O apoio do veterinário é essencial para qualidade de vida do seu melhor amigo. Ele atua em diversas situações, como:</p>
+      <ul class="padawabs">
+        <li>Cuidados preventivos</li>
+        <li>Diagnóstico precoce</li>
+        <li>Vacinas e medicamentos</li>
+        <li>Consultas de rotina</li>
+        <li>Orientações de alimentação e higiene</li>
+      </ul>
+    </div>
+    <div class="about__ilustra">
+      <img src="{{ url_for('static', filename='doganddoctor.jpg') }}" alt="Cachorro sendo examinado por veterinária">
+    </div>
+  </div>
+</section>
+
+<!-- HIGIENE DO PET -->
+<section class="container panel panel--spaced" aria-labelledby="tit-higiene">
+  <div class="panel__inner grid-2 grid-2--rev">
+    <div class="about__ilustra">
+      <img src="{{ url_for('static', filename='banhopet.jpg') }}" alt="Cachorro tomando banho">
+    </div>
+    <div>
+      <h2 id="tit-higiene">A higiene do pet é indicada por veterinários</h2>
+      <p>Com cuidados preventivos, ela reduz a transmissão de doenças para pets e humanos.</p>
+      <ul class="padawabs">
+        <li>O banho é um aliado no tratamento de doenças de pele nos pets.</li>
+        <li>A boa higiene facilita a limpeza do pet e evita a contaminação do ambiente.</li>
+        <li>A escovação do pelo reduz a queda habitual e elimina os nós.</li>
+        <li>O banho ajuda a manter a pelagem bem cuidada e evita maus cheiros.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ADESTRAMENTO -->
+<section class="container panel panel--spaced" aria-labelledby="tit-filhote">
+  <div class="panel__inner grid-2">
+    <!-- Coluna 1: texto -->
+    <div>
+      <h2 id="tit-filhote">Aprenda a se comunicar com o seu filhote</h2>
+      <p>Adestre seu pet e incentive comportamentos positivos, como:</p>
+      <ul class="padawabs">
+        <li>Xixi e cocô em lugares certos</li>
+        <li>Preservar móveis e objetos</li>
+        <li>Evitar mordidas indesejadas</li>
+        <li>Não chorar e latir em excesso</li>
+      </ul>
+      <p>Filhotes têm muita energia e ainda estão aprendendo a socializar. Com o adestramento, você ensina bons hábitos desde os primeiros meses.</p>
+    </div>
+
+    <!-- Coluna 2: imagem -->
+    <div class="about__ilustra" aria-hidden="true">
+      <img src="{{ url_for('static', filename='adestramentocao.jpg') }}"
+           alt=""
+           loading="lazy">
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtualenv
+.venv/
+venv/
+
+# IDE / OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Flask / logs
+instance/
+*.log
+
+# DB locais
+*.db
+*.sqlite
+
+# Segredos
+.env
+
+# Alembic (se não usa)
+migrations/
+alembic.ini

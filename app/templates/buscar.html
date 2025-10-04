@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Petzzy — Profissionais</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="index.html">Petzzy</a>
+      <nav class="nav">
+        <a href="servicos.html">Serviços</a>
+        <a href="agendamentos.html">Meus agendamentos</a>
+        <a href="quem_somos.html">Quem somos</a>
+        <a class="btn" href="login.html">Entrar</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO CURTO -->
+  <section class="hero hero--soft">
+    <div class="container hero__mini">
+      <h1 id="titulo-pagina">Profissionais</h1>
+      <p id="subtitulo-pagina">Lista de profissionais disponíveis</p>
+    </div>
+  </section>
+
+  <main class="container pad-y">
+    <!-- Lista de Profissionais -->
+    <section class="grid" role="list" id="lista-profissionais">
+
+      <!-- Profissional 1 -->
+      <article class="card" role="listitem">
+        <div class="card__thumb">
+          <img src="assets/vet1.jpg" alt="Foto do Dr. João Silva">
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Dr. João Silva</h3>
+          <p>Veterinário especializado em atendimento domiciliar</p>
+          <ul class="list--check">
+            <li>Vacinação</li>
+            <li>Check-up</li>
+            <li>Atendimento humanizado</li>
+          </ul>
+          <a href="agendamentos.html" class="btn">Agendar</a>
+        </div>
+      </article>
+
+      <!-- Profissional 2 -->
+      <article class="card" role="listitem">
+        <div class="card__thumb">
+          <img src="assets/vet2.jpg" alt="Foto da Dra. Ana Paula">
+        </div>
+        <div class="card__body">
+          <h1 class="card__title">Dra. Ana Paula</h1>
+          <p>Clínica geral e cirurgiã veterinária</p>
+          <ul class="list--check">
+            <li>Consultas presenciais e domiciliares</li>
+            <li>Pequenos procedimentos</li>
+            <li>Orientações de rotina</li>
+          </ul>
+          <a href="agendamentos.html" class="btn">Agendar</a>
+        </div>
+      </article>
+
+      <!-- Profissional 3 -->
+      <article class="card" role="listitem">
+        <div class="card__thumb">
+          <img src="assets/vet3.jpg" alt="Foto da Clínica Petz Care">
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Clínica Petz Care</h3>
+          <p>Equipe multidisciplinar para pets</p>
+          <ul class="list--check">
+            <li>Exames laboratoriais</li>
+            <li>Vacinação em dia</li>
+            <li>Atendimento emergencial</li>
+          </ul>
+          <a href="agendamentos.html" class="btn">Agendar</a>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer class="footer">
+    © <span id="year"></span> Petzzy • Todos os direitos reservados
+  </footer>
+
+  <script>
+    // Atualiza ano no rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Captura o parâmetro da URL (ex: ?q=Veterinário)
+    const params = new URLSearchParams(window.location.search);
+    const servico = params.get("q");
+    if (servico) {
+      document.getElementById("titulo-pagina").textContent = servico;
+      document.getElementById("subtitulo-pagina").textContent =
+        "Profissionais disponíveis para " + servico;
+    }
+  </script>
+</body>
+</html>

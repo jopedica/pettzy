@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% set story  = (blocks | selectattr('section','equalto','story')  | list | first) %}
+{% set mission = (blocks | selectattr('section','equalto','mission') | list | first) %}
+{% set vision  = (blocks | selectattr('section','equalto','vision')  | list | first) %}
+{% set values  = (blocks | selectattr('section','equalto','values')  | list | first) %}
+
+
+<!-- HERO CURTO -->
+<section class="hero hero--soft">
+  <div class="container hero__mini">
+    <h1>Quem Somos</h1>
+    <p>Somos estudantes do <strong>UniCEUB</strong> criando uma plataforma simples e segura para o cuidado dos seus pets.</p>
+  </div>
+</section>
+
+<!-- CONTEÚDO -->
+<main class="container pad-y">
+<!-- Sobre -->
+<section class="about grid-2 card">
+  <div>
+    <h2 class="h3">{{ story.title if story else 'Nossa história' }}</h2>
+    <div class="richtext">
+      {{ story.body | safe if story and story.body else
+         "Conteúdo em breve. Edite em /admin → Quem Somos." }}
+    </div>
+
+    <ul class="badges">
+      <li class="badge">Praticidade</li>
+      <li class="badge">Segurança</li>
+      <li class="badge">Atendimento humanizado</li>
+    </ul>
+  </div>
+  <div class="about__ilustra" aria-hidden="true">
+    <span>🐾</span>
+  </div>
+</section>
+
+<!-- Missão / Visão / Valores -->
+<section class="values">
+  <article class="value-card">
+    <h3>{{ mission.title if mission else 'Missão' }}</h3>
+    <p>{{ mission.body if mission and mission.body else '—' }}</p>
+  </article>
+  <article class="value-card">
+    <h3>{{ vision.title if vision else 'Visão' }}</h3>
+    <p>{{ vision.body if vision and vision.body else '—' }}</p>
+  </article>
+  <article class="value-card">
+    <h3>{{ values.title if values else 'Valores' }}</h3>
+    <p>{{ values.body if values and values.body else '—' }}</p>
+  </article>
+</section>
+
+
+  <!-- CTA simples -->
+  <section class="cta card">
+    <h2 class="h3">Quer acompanhar nossa evolução?</h2>
+    <p>Em breve teremos novidades. Enquanto isso, explore serviços e faça um agendamento de teste.</p>
+    <a class="btn" href="{{ url_for('main.servicos') }}">Ver serviços</a>
+  </section>
+</main>
+
+{% endblock %}

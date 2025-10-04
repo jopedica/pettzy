@@ -1,0 +1,44 @@
+{% extends "admin/base_admin.html" %}
+{% set page_title = page_title or ("Novo bloco — Quem Somos") %}
+
+{% block admin_content %}
+<form method="post" class="form" style="max-width:900px">
+  <div class="grid-2">
+    <label class="label">Título
+      <input class="input" name="title" value="{{ block.title if block else '' }}" required>
+    </label>
+    <label class="label">Seção
+      <select class="input" name="section" required>
+        {% set opts = [('story','História'), ('mission','Missão'), ('vision','Visão'), ('values','Valores')] %}
+        {% for val,txt in opts %}
+          <option value="{{ val }}" {{ 'selected' if block and block.section==val else '' }}>{{ txt }}</option>
+        {% endfor %}
+      </select>
+    </label>
+  </div>
+
+  <label class="label">Ordem
+    <input class="input" type="number" min="0" name="display_order"
+           value="{{ block.display_order if block else 10 }}">
+  </label>
+
+  <label class="label">Conteúdo
+    <textarea class="input" name="body" rows="8">{{ block.body if block else '' }}</textarea>
+  </label>
+
+  <!-- Campos opcionais -->
+  <div class="grid-2">
+    <label class="label">Imagem (URL)
+      <input class="input" name="image" value="{{ block.image if block else '' }}">
+    </label>
+    <label class="label">Ícone (classe/emoji)
+      <input class="input" name="icon" value="{{ block.icon if block else '' }}">
+    </label>
+  </div>
+
+  <div class="actions" style="margin-top:12px">
+    <a class="btn btn--ghost" href="{{ url_for('main.admin_dashboard') }}">Cancelar</a>
+    <button class="btn" type="submit">Salvar</button>
+  </div>
+</form>
+{% endblock %}

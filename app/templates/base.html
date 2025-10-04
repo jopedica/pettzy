@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Petzzy — {{ page_title or "O cuidado que seu pet merece" }}</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  {# Opcional: Font Awesome para ícones #}
+  {# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> #}
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+<header class="topbar">
+  <div class="container topbar__inner">
+    <a class="brand" href="{{ url_for('main.index') }}">Petzzy</a>
+
+    <nav class="nav" aria-label="Primária">
+      <a href="{{ url_for('main.index') }}">Início</a>
+      <a href="{{ url_for('main.servicos') }}">Serviços</a>
+      <a href="{{ url_for('main.agendamentos') }}">Meus agendamentos</a>
+      <a href="{{ url_for('main.quem_somos') }}">Quem somos</a>
+    </nav>
+
+    <div class="nav-auth" data-userid="{{ session.get('user_id') or '' }}">
+      {% if session.get('user_id') %}
+        <span class="nav-user">Olá, {{ session.get('user_name') or current_user_first }}</span>
+        <a class="btn btn--link" href="{{ url_for('main.logout') }}">Sair</a>
+      {% else %}
+        <a class="btn btn--link" href="{{ url_for('main.login') }}">Entrar</a>
+        <a class="btn" href="{{ url_for('main.cadastro') }}">Cadastrar</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+
+  {# ===== FLASH MESSAGES ===== #}
+  {% with msgs = get_flashed_messages(with_categories=true) %}
+    {% if msgs %}
+      <div class="flash-container">
+        <div class="container">
+          {% for category, message in msgs %}
+            <div class="flash flash-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- ===== CONTEÚDO DA PÁGINA ===== -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; {{  now().year if false else 2025  }} Petzzy — Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  
+</body>
+</html>

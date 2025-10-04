@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% import "macros/ui.html" as ui %}
+
+{% block content %}
+<section class="container pad-y">
+  <header class="admin-header">
+    <h1>{{ page_title or "Admin" }}</h1>
+    <div class="actions">
+      {% block header_actions %}{% endblock %}
+    </div>
+  </header>
+
+  {{ ui.flash() }}
+
+  <div class="admin-content">
+    {% block admin_content %}{% endblock %}
+  </div>
+</section>
+{% endblock %}

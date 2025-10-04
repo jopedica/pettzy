@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container pad-y" style="max-width: 920px">
+  <h1>{{ 'Editar' if block else 'Novo' }} bloco — Quem Somos</h1>
+
+  <form method="post" class="form">
+    <label>Título
+      <input name="title" required value="{{ block.title if block else '' }}">
+    </label>
+
+    <label>Seção (story, mission, vision, values, ou outra)
+      <input name="section" value="{{ block.section if block else '' }}">
+    </label>
+
+    <label>Ordem de exibição
+      <input type="number" name="display_order" value="{{ block.display_order if block else 0 }}">
+    </label>
+
+    <label>Ícone (emoji ou caminho)
+      <input name="icon" value="{{ block.icon if block else '' }}">
+    </label>
+
+    <label>Imagem (em static/, ex.: imgs/pets.png)
+      <input name="image" value="{{ block.image if block else '' }}">
+    </label>
+
+    <label>Texto
+      <textarea name="body" rows="6">{{ block.body if block else '' }}</textarea>
+    </label>
+
+    <div style="display:flex;gap:12px;margin-top:12px">
+      <button class="btn">Salvar</button>
+      <a class="btn btn--ghost" href="{{ url_for('main.about_admin') }}">Cancelar</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

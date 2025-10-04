@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+
+<main class="container pad-y">
+  <h1 class="auth__title">Acessar ou criar conta</h1>
+
+  <section class="auth__grid">
+    <!-- Coluna: Login -->
+    <div class="auth-card">
+      <h2 class="h3">Acesse sua conta</h2>
+
+      <!-- Demonstração: redireciona para a home -->
+      <form class="auth-form" action="{{ url_for('main.login') }}" method="post">
+  <label class="label" for="email">E-mail</label>
+  <input class="input" id="email" name="email" type="email"
+         placeholder="Digite seu e-mail" required />
+
+  <div class="pass-row">
+    <div class="pass-wrap">
+      <label class="label" for="senha">Senha</label>
+      <a class="link" href="#" title="Recuperar senha">Esqueci a senha</a>
+    </div>
+
+    <div class="input-icon">
+      <input class="input" id="senha" name="senha" type="password"
+             placeholder="Sua senha" minlength="6" required />
+      <button class="toggle-pass" type="button" data-target="senha" aria-label="Mostrar senha">👁️</button>
+    </div>
+  </div>
+
+  <button class="btn" type="submit">Entrar</button>
+</form>
+
+    </div>
+
+    <!-- Coluna: Criar conta -->
+    <aside class="auth-side auth-side--center">
+      <h2>Criar uma conta é rápido,<br />fácil e gratuito!</h2>
+      <p>
+        Com sua conta Petzzy você acessa serviços perto de você, avaliações de profissionais
+        e pode gerenciar seus agendamentos e pets em um só lugar.
+      </p>
+      <a class="btn btn--ghost btn--wide" href="{{ url_for('main.cadastro') }}">Criar minha conta</a>
+    </aside>
+  </section>
+</main>
+
+<!-- Script específico da página -->
+<script>
+  // ano no rodapé (o base.html já tem footer, só atualizamos o span se existir)
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // alternar exibição da senha
+  (function () {
+    const btn = document.querySelector('.toggle-pass');
+    const input = document.getElementById('senha');
+    btn?.addEventListener('click', () => {
+      input.type = input.type === 'password' ? 'text' : 'password';
+    });
+  })();
+</script>
+
+{% endblock %}

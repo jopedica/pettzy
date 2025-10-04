@@ -1,0 +1,14 @@
+{% extends "admin/base_admin.html" %}
+{% import "macros/ui.html" as ui %}
+{% set page_title = 'Editar serviço' if service else 'Novo serviço' %}
+
+{% block admin_content %}
+<form method="post" class="form" style="max-width:720px">
+  {{ ui.field('name','Nome', service.name if service else '', required=true) }}
+  {{ ui.textarea('description','Descrição', service.description if service else '', 5) }}
+  {{ ui.number('price','Preço médio (R$)', ('%.2f'|format(service.price)) if service else '') }}
+  {{ ui.field('icon','Ícone (arquivo em static/)', service.icon if service else '') }}
+  {{ ui.checkbox('is_active','Ativo', service.is_active if service else false) }}
+  {{ ui.form_actions(url_for('main.admin_dashboard')) }}
+</form>
+{% endblock %}
