@@ -3,7 +3,8 @@ import os
 from datetime import timedelta
 
 class Config:
-    SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret")  # FIXO!
+    SECRET_KEY = "minha_chave_super_secreta_123"
+
     # sessão (cookies)
     SESSION_COOKIE_NAME = "pettzy_session"
     SESSION_COOKIE_HTTPONLY = True

@@ -1,0 +1,17 @@
+#consultar#
+select * from services;
+-- Ordenado pelo nome do serviço (A-Z)
+SELECT * FROM services ORDER BY name ASC;
+
+
+#inserir#
+INSERT INTO services (name, description, price, icon, is_active)
+VALUES ('Adestramento', 'Treine seu dog.', 100.00, 'adestramento.png', 1);
+
+#update#
+UPDATE services
+SET price = 135.00
+WHERE id = 2;
+
+#excluir#
+DELETE FROM services WHERE id = 2;
